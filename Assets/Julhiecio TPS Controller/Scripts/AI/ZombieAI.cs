@@ -51,8 +51,11 @@ namespace JUTPS.AI
         private bool SawATarget = false;
         public UnityEvent _OnStopSeeingTarget;
         private bool StoppedSeeingTarget;
+        
         protected virtual void Update()
         {
+            if (Time.frameCount % 3 != 0) return;
+            
             if (character.IsDead) { this.enabled = false; return; }
 
             //Get targets

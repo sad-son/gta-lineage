@@ -16,6 +16,8 @@ namespace JUTPS.AI
         [Range(0, 500)] public float Radious;
         [Range(0,360)]public float Angle;
 
+        private Collider[] colliders = new Collider[2];
+        
         public FieldView(float radious, float angle)
         {
             Radious = radious;
@@ -23,23 +25,25 @@ namespace JUTPS.AI
         }
         public Collider[] CheckViewCollider(Vector3 position, Vector3 forward, LayerMask targetMask, GameObject viewerToIgnore = null)
         {
-            List<Collider> colliders = Physics.OverlapSphere(position, Radious, targetMask).ToList();
+            colliders = Physics.OverlapSphere(position, Radious, targetMask);
 
-            foreach (Collider col in colliders.ToArray())
+            for (int i = 0; i < colliders.Length; i++)
             {
-                Transform target = col.transform;
+                var collider = colliders[i];
+                
+                Transform target = collider.transform;
                 
                 Vector3 targetposition = target.position; targetposition.y = position.y;
 
                 Vector3 directionToTarget = (targetposition - position).normalized;
 
-                if (Vector3.Angle(forward, directionToTarget) > Angle / 2 || col.gameObject == viewerToIgnore)
+                if (Vector3.Angle(forward, directionToTarget) > Angle / 2 || collider.gameObject == viewerToIgnore)
                 {
-                    colliders.Remove(col);
+                    colliders[i] = null;
                 }
             }
 
-            return colliders.ToArray();
+            return colliders;
         }
         public bool IsVisibleToThisFieldOfView(Transform LookedTarget, Vector3 ViewPosition, Vector3 ViewForward, LayerMask LayerMask, float threshold = 0.6f, string[] TagsToConsiderVisible = default(string[]))
         {
@@ -367,7 +371,7 @@ namespace JUTPS.AI
 
             foreach (Collider col in targets)
             {
-                if (TagMatches(col.tag, allowedTags))
+                if (col != null && TagMatches(col.tag, allowedTags))
                 {
                     if (col.TryGetComponent(out JUHealth health))
                     {
