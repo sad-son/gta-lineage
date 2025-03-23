@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: f11ddf3007926cb49b761a8e5806d267
+  productGUID: 57628c3aad7f72141b0311e78bd6d530
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -804,14 +804,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 2
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: fusion-tanknarok-2.0.5
+  metroPackageName: gta-lineage
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: fusion-tanknarok-2.0.5
+  metroApplicationDescription: gta-lineage
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
